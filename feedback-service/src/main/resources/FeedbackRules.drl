@@ -1,0 +1,12 @@
+package com.redhat.switchyard.feedback.service
+import org.switchyard.Message
+import com.redhat.switchyard.feedback.model.Feedback
+global Message message
+
+rule "FeedbackRules"
+    when
+        $feedback : Feedback(email matches ".*@redhat.com$");
+    then
+        System.out.println("Red Hat Email Found. Setting Priority Flag");
+        $feedback.setPriority(true);
+end

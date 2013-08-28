@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<routes xmlns="http://camel.apache.org/schema/spring">
+  <route>
+    <from uri="switchyard://FeedbackFileService"/>
+    <log message="FeedbackFileService - message received with feedback size: ${body.size}"/>
+    <split>
+    	<simple>${body}</simple>
+    	<log message="Sending ${body.email}"></log>
+    	<to uri="switchyard://FeedbackService"/>
+    </split>
+  </route>
+</routes>

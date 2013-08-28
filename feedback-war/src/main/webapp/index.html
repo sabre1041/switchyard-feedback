@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <script src="js/jquery-1.10.2.min.js"></script>
+ <script src="js/feedback.js"></script>
+<title>Switchyard Feedback Application</title>
+</head>
+<body>
+<h2>Feedback</h2>
+Please Enter your feedback using SwitchBrick in the form below
+ <form action="rest/feedback" id="searchForm">
+ <table>
+ <tr><td>Email</td><td><input type="text" id="email"  placeholder="Email" /></td></tr>
+ <tr><td>Comment</td><td><textarea rows="4" cols="50" id="comment"  placeholder="Comment"></textarea></td></tr>
+ <tr><td>Subscription</td><td><input type="checkbox" id="subscription"/></td></tr>
+ </table>
+<input type="submit" value="Submit" />
+</form>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:file="urn:switchyard-component-camel-file:config:1.0" xmlns:jms="urn:switchyard-component-camel-jms:config:1.0" xmlns:mail="urn:switchyard-component-camel-mail:config:1.0" xmlns:rules="urn:switchyard-component-rules:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:transform="urn:switchyard-config:transform:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="feedback-service" targetNamespace="urn:com.redhat.switchyard:feedback-service:1.0">
+  <sca:composite name="feedback-service" targetNamespace="urn:com.redhat.switchyard:feedback-service:1.0">
+    <sca:component name="FeedbackService">
+      <bean:implementation.bean class="com.redhat.switchyard.feedback.service.FeedbackServiceBean"/>
+      <sca:service name="FeedbackService">
+        <sca:interface.java interface="com.redhat.switchyard.feedback.service.FeedbackService"/>
+      </sca:service>
+      <sca:reference name="FeedbackRules">
+        <sca:interface.java interface="com.redhat.switchyard.feedback.service.FeedbackRules"/>
+      </sca:reference>
+      <sca:reference name="OutgoingFeedbackService">
+        <sca:interface.java interface="com.redhat.switchyard.feedback.service.OutgoingFeedbackService"/>
+      </sca:reference>
+    </sca:component>
+    <sca:service name="FeedbackService" promote="FeedbackService/FeedbackService">
+      <sca:interface.java interface="com.redhat.switchyard.feedback.service.FeedbackService"/>
+      <jms:binding.jms>
+        <jms:queue>switchyardFeedback</jms:queue>
+        <jms:connectionFactory>#ConnectionFactory</jms:connectionFactory>
+      </jms:binding.jms>
+    </sca:service>
+    <sca:reference name="OutgoingFeedbackService" multiplicity="0..1" promote="FeedbackService/OutgoingFeedbackService">
+      <sca:interface.java interface="com.redhat.switchyard.feedback.service.OutgoingFeedbackService"/>
+      <mail:binding.mail secure="false">
+        <mail:contextMapper/>
+        <mail:messageComposer class="com.redhat.switchyard.feedback.service.FeedbackMessageComposer"/>
+        <mail:host>localhost</mail:host>
+        <mail:username>user</mail:username>
+        <mail:produce>
+          <mail:subject>SwitchBrick Subscription Notification</mail:subject>
+          <mail:from>subscription@switchbrick.com</mail:from>
+        </mail:produce>
+      </mail:binding.mail>
+    </sca:reference>
+    <sca:component name="FeedbackRules">
+      <rules:implementation.rules>
+        <rules:manifest>
+          <rules:resources>
+            <rules:resource location="FeedbackRules.drl" type="DRL"/>
+          </rules:resources>
+        </rules:manifest>
+      </rules:implementation.rules>
+      <sca:service name="FeedbackRules">
+        <sca:interface.java interface="com.redhat.switchyard.feedback.service.FeedbackRules"/>
+      </sca:service>
+    </sca:component>
+    <sca:component name="FeedbackRoute">
+      <camel:implementation.camel>
+        <camel:xml path="feedback-route.xml"/>
+      </camel:implementation.camel>
+      <sca:service name="FeedbackFileService">
+        <sca:interface.java interface="com.redhat.switchyard.feedback.service.FeedbackFileService"/>
+      </sca:service>
+      <sca:reference name="FeedbackService">
+        <sca:interface.java interface="com.redhat.switchyard.feedback.service.FeedbackService"/>
+      </sca:reference>
+    </sca:component>
+    <sca:service name="FeedbackFileService" promote="FeedbackRoute/FeedbackFileService">
+      <sca:interface.java interface="com.redhat.switchyard.feedback.service.FeedbackInputFileService"/>
+      <file:binding.file>
+        <file:contextMapper/>
+        <file:directory>${prop.filedir.input}</file:directory>
+        <file:fileName>feedback.txt</file:fileName>
+        <file:consume>
+          <file:move>${prop.filedir.completed}</file:move>
+        </file:consume>
+      </file:binding.file>
+    </sca:service>
+    <sca:property value="/temp/feedback/input" name="prop.filedir.input"/>
+    <sca:property value="../completed" name="prop.filedir.completed"/>
+  </sca:composite>
+  <transforms>
+    <transform:transform.smooks from="java:java.lang.String" to="java:java.util.List" type="SMOOKS" config="Feedback_Smooks.xml"/>
+  </transforms>
+</switchyard>
