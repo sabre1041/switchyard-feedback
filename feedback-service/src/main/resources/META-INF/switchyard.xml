@@ -25,11 +25,13 @@
       <mail:binding.mail secure="false">
         <mail:contextMapper/>
         <mail:messageComposer class="com.redhat.switchyard.feedback.service.FeedbackMessageComposer"/>
-        <mail:host>localhost</mail:host>
-        <mail:username>user</mail:username>
+        <mail:host>${env.FEEDBACK_EMAIL_HOST}</mail:host>
+        <mail:port>587</mail:port>
+        <mail:username>${env.FEEDBACK_EMAIL_USER}</mail:username>
+        <mail:password>${env.FEEDBACK_EMAIL_PASSWORD}</mail:password>
         <mail:produce>
           <mail:subject>SwitchBrick Subscription Notification</mail:subject>
-          <mail:from>subscription@switchbrick.com</mail:from>
+          <mail:from>andy@andyserver.mailgun.org</mail:from>
         </mail:produce>
       </mail:binding.mail>
     </sca:reference>
@@ -67,7 +69,7 @@
         </file:consume>
       </file:binding.file>
     </sca:service>
-    <sca:property value="/temp/feedback/input" name="prop.filedir.input"/>
+    <sca:property value="/tmp/feedback/input" name="prop.filedir.input"/>
     <sca:property value="../completed" name="prop.filedir.completed"/>
   </sca:composite>
   <transforms>

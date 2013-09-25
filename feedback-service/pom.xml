@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>switchyard-feedback-service</artifactId>
-	<name>com.redhat.switchyard:feedback-service</name>
+	<name>Switchyard Feedback - Switchyard</name>
 	<properties>
 		<switchyard.version>1.0.0.Final</switchyard.version>
 		<prop.filedir.input>/temp/feedback/input</prop.filedir.input>
