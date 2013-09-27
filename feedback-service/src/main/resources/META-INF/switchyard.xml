@@ -25,13 +25,13 @@
       <mail:binding.mail secure="false">
         <mail:contextMapper/>
         <mail:messageComposer class="com.redhat.switchyard.feedback.service.FeedbackMessageComposer"/>
-        <mail:host>${env.FEEDBACK_EMAIL_HOST}</mail:host>
-        <mail:port>587</mail:port>
-        <mail:username>${env.FEEDBACK_EMAIL_USER}</mail:username>
-        <mail:password>${env.FEEDBACK_EMAIL_PASSWORD}</mail:password>
+        <mail:host>${feedbackEmailHost:host}</mail:host>
+        <mail:port>${feedbackEmailPort:587}</mail:port>
+        <mail:username>${feedbackEmailUser:user}</mail:username>
+        <mail:password>${feedbackEmailPassword:password}</mail:password>
         <mail:produce>
           <mail:subject>SwitchBrick Subscription Notification</mail:subject>
-          <mail:from>andy@andyserver.mailgun.org</mail:from>
+          <mail:from>${feedbackEmailFrom:support@switchbrick.com}</mail:from>
         </mail:produce>
       </mail:binding.mail>
     </sca:reference>
