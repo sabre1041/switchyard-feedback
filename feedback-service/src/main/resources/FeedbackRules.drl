@@ -3,6 +3,8 @@ import org.switchyard.Message
 import com.redhat.switchyard.feedback.model.Feedback
 global Message message
 
+// Rule that checks whether the entered email has a redhat email domain
+// The RHS of the rule will set the priority flag on the Feedback object
 rule "FeedbackRules"
     when
         $feedback : Feedback(email matches ".*@redhat.com$");

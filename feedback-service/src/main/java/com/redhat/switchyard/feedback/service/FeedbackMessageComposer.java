@@ -7,6 +7,14 @@ import org.switchyard.component.camel.common.composer.CamelMessageComposer;
 
 import com.redhat.switchyard.feedback.model.Feedback;
 
+/**
+ * Custom Camel Message Composer which allows for the dynamic assignment of the "to" and "priority"
+ * fields of an Email. 
+ * 
+ * @author Andrew Block
+ * @see CamelMessageComposer
+ *
+ */
 public class FeedbackMessageComposer extends CamelMessageComposer {
 
 	private static final String TO_PROP = "to";

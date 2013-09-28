@@ -4,6 +4,12 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
+/**
+ * Feedback model object
+ * 
+ * @author Andrew Block
+ *
+ */
 @XmlRootElement
 public class Feedback implements Serializable {
 	

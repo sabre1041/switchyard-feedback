@@ -51,10 +51,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 		}
 	}
 
-	@Override
-	public String test() {
-		return "Hello World";
-	}
 	
 	 @PostConstruct
 	    public void postConstruct() {

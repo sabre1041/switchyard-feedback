@@ -18,6 +18,15 @@ import org.switchyard.test.SwitchYardTestKit;
 
 import com.redhat.switchyard.feedback.model.Feedback;
 
+/**
+ * Unit test to validate the execution of Camel Route
+ * 
+ * @author Andrew Block
+ * @see SwitchYardRunner
+ * @see CDIMixIn
+ * @see HornetQMixIn
+ *
+ */
 @RunWith(SwitchYardRunner.class)
 @SwitchYardTestCaseConfig(config = SwitchYardTestCaseConfig.SWITCHYARD_XML, mixins = { CDIMixIn.class, HornetQMixIn.class })
 public class FeedbackCamelTest {

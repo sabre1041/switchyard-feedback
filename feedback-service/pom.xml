@@ -14,8 +14,6 @@
 	<name>Switchyard Feedback - Switchyard</name>
 	<properties>
 		<switchyard.version>1.0.0.Final</switchyard.version>
-		<prop.filedir.input>/temp/feedback/input</prop.filedir.input>
-		<prop.filedir.completed>../completed</prop.filedir.completed>
 	</properties>
 	<dependencies>
 		<dependency>

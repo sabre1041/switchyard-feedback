@@ -1,6 +1,7 @@
 package com.redhat.switchyard.feedback.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.switchyard.Exchange;
 import org.switchyard.component.test.mixins.cdi.CDIMixIn;
 import org.switchyard.component.test.mixins.hornetq.HornetQMixIn;
 import org.switchyard.test.BeforeDeploy;
@@ -17,6 +19,16 @@ import org.switchyard.test.SwitchYardTestCaseConfig;
 import org.switchyard.test.SwitchYardTestKit;
 import org.switchyard.test.mixins.PropertyMixIn;
 
+import com.redhat.switchyard.feedback.model.Feedback;
+
+/**
+ * Validates the successful transformation of a file into the canonical Feedback model
+ * 
+ * @author Andrew Block
+ * @see SwitchYardRunner
+ * @see PropertyMixIn
+ *
+ */
 @RunWith(SwitchYardRunner.class)
 @SwitchYardTestCaseConfig(config = SwitchYardTestCaseConfig.SWITCHYARD_XML, mixins = { CDIMixIn.class, HornetQMixIn.class, PropertyMixIn.class })
 public class FeedbackSmooksFileTest {
@@ -54,17 +66,11 @@ public class FeedbackSmooksFileTest {
         assertEquals(2,camel.getMessages().size());	
 
 		
-//        Exchange exchange = camel.getMessages().peek();
-//		
-//		List<Feedback> outgoingFeedback = (List<Feedback>) exchange.getMessage().getContent();
-//		assertNotNull(outgoingFeedback);
-	
-
-
+        Exchange exchange = camel.getMessages().peek();
+		
+		Feedback outgoingFeedback = (Feedback) exchange.getMessage().getContent();
+		assertNotNull(outgoingFeedback);
         
 	}
-	
-	
-
 	
 }

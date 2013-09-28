@@ -14,6 +14,12 @@ import org.switchyard.test.SwitchYardTestCaseConfig;
 
 import com.redhat.switchyard.feedback.model.Feedback;
 
+/**
+ * Validates the execution of the Sw 	itchYard service invoking Drools rules
+ * 
+ * @author Andrew Block
+ *
+ */
 @RunWith(SwitchYardRunner.class)
 @SwitchYardTestCaseConfig(config = SwitchYardTestCaseConfig.SWITCHYARD_XML, mixins = { CDIMixIn.class, HornetQMixIn.class })
 public class FeedbackRulesTest {
