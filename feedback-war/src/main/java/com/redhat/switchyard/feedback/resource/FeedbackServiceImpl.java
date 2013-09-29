@@ -19,6 +19,13 @@ import org.slf4j.LoggerFactory;
 
 import com.redhat.switchyard.feedback.model.Feedback;
 
+/**
+ * Feedback RestEasy service. Exposes restful endpoint and send to a JMS queue for 
+ * SwitchYard service processing
+ * 
+ * @author Andrew Block
+ *
+ */
 public class FeedbackServiceImpl implements FeedbackService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FeedbackServiceImpl.class);
@@ -35,9 +42,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 	public Response submit(Feedback feedback) {
 		
 		try {
-			System.out.println("Feedback Submitted");
-			System.out.println("Email: "+feedback.getEmail());
-			System.out.println("Comment: "+feedback.getComment());
 			
 			submitFeedbackToQueue(feedback);
 	

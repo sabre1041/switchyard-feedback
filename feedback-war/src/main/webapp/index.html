@@ -4,18 +4,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
  <script src="js/jquery-1.10.2.min.js"></script>
  <script src="js/feedback.js"></script>
-<title>Switchyard Feedback Application</title>
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+<title>SwitchBrick Feedback</title>
 </head>
-<body>
-<h2>Feedback</h2>
-Please Enter your feedback using SwitchBrick in the form below
- <form action="rest/feedback" id="searchForm">
- <table>
- <tr><td>Email</td><td><input type="text" id="email"  placeholder="Email" /></td></tr>
- <tr><td>Comment</td><td><textarea rows="4" cols="50" id="comment"  placeholder="Comment"></textarea></td></tr>
- <tr><td>Subscription</td><td><input type="checkbox" id="subscription"/></td></tr>
- </table>
-<input type="submit" value="Submit" />
-</form>
-</body>
+	<body>
+	
+	<div class="container">
+		<div class="inner">
+			<h2>SwitchBrick Feedback</h2>
+			<p id="feedback">Please Enter your feedback using SwitchBrick in the form below</p>
+		</div><!-- end inner -->
+		<div class="divider"></div><!-- end divider -->
+		<div class="inner">
+			<form action="rest/feedback" id="searchForm">
+				<input type="email" placeholder="Email" id="email" autocomplete="off" autofocus="autofocus">
+				<textarea placeholder="Comment" id="comment"></textarea>
+				<div id="subscriptioncontainer">
+					<p id="wantsubscription">Would you like a subscription?</p>
+					<input type="checkbox"><span id="agreetxt">Yes, I would like to subscribe</span>
+				</div><!-- end subscriptioncontainer -->
+				<input type="submit" value="Send feedback" id="submitform">
+			</form>
+			<div id="message" style="display:none"/>
+		</div><!-- end inner -->
+	</div><!-- end container -->
+	</body>
 </html>
