@@ -64,11 +64,11 @@ h2, #feedback {
 }
 
 .success  {
-	color: #000000;
+	color: #458B00;
 }
 
 .error  {
-	color: #000000;
+	color: #FF0000;
 }
 
 #email:focus, #comment:focus {
