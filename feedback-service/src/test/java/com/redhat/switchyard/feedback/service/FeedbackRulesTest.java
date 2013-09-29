@@ -15,7 +15,7 @@ import org.switchyard.test.SwitchYardTestCaseConfig;
 import com.redhat.switchyard.feedback.model.Feedback;
 
 /**
- * Validates the execution of the Sw 	itchYard service invoking Drools rules
+ * Validates the execution of the SwitchYard service invoking Drools rules
  * 
  * @author Andrew Block
  *
@@ -31,7 +31,7 @@ public class FeedbackRulesTest {
 	@Test
 	public void priorityTest() {
 		Feedback feedback = new Feedback();
-		feedback.setEmail("ablock@redhat.com");
+		feedback.setEmail("rsmith@redhat.com");
 		service.sendInOnly(feedback);
 		assertTrue(feedback.isPriority());
 	}
@@ -47,7 +47,7 @@ public class FeedbackRulesTest {
 	@Test
 	public void whitespacePriorityTest() {
 		Feedback feedback = new Feedback();
-		feedback.setEmail("ablock@redhat.com   ");
+		feedback.setEmail("swhite@redhat.com   ");
 		service.sendInOnly(feedback);
 		assertFalse(feedback.isPriority());
 	}

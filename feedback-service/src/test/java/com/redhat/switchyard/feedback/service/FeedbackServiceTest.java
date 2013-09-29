@@ -21,7 +21,7 @@ import org.switchyard.test.SwitchYardTestKit;
 import com.redhat.switchyard.feedback.model.Feedback;
 
 /**
- * Demonstrated an overall run of the Feedback service by sending a JMS {@link Message} to the FeedbackService, 
+ * Demonstration of an overall run of the Feedback service by sending a JMS {@link Message} to the FeedbackService, 
  * perform Drools rules on the Feedback Message. An example of a mocking a service is provided to ensure no
  * emails are actually sent out as part of the Unit Test
  * 
@@ -48,7 +48,7 @@ public class FeedbackServiceTest {
 
         
 		Feedback message = new Feedback();
-		message.setEmail("ablock@redhat.com");
+		message.setEmail("jdoe@redhat.com");
 		message.setComment("This is a message from the switchyard test program");
 		message.setSubscription(true);
         final ObjectMessage msg = hornetQMixIn.getJMSSession().createObjectMessage();
